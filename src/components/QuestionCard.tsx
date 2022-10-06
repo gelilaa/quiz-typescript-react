@@ -16,7 +16,7 @@ export const QuestionCard: React.FC<Props> = ({
   questionNr,
   totalQuestions,
 }) => (
-  <div>
+  <div className="card">
     {" "}
     <p className="number">
       Question: {questionNr}/{totalQuestions}
@@ -26,6 +26,7 @@ export const QuestionCard: React.FC<Props> = ({
       {answers.map((answer) => (
         <div key={answer}>
           <button
+          className="btn"
             disabled={userAnswer ? true : false}
             value={answer}
             onClick={callback}

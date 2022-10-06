@@ -2,7 +2,7 @@ import React, {useState}from 'react';
 import {QuestionCard} from "./components/QuestionCard"
 import { fetchQuestions } from './API';
 import { Difficulty,QuestionState } from './API';
-
+import "./App.css"
 export type AnswerObject ={
   question:string,
   answer: string,
@@ -58,24 +58,35 @@ function App() {
 
   }
   return (
-    <div className="App">
-      <h1>React Typescript Quiz</h1>
-      {gameover || userAnswer.length === TOTAL_QUESTIONS ?<button className="start" onClick={startTrivia}>
-        Start
-      </button>: null }
-      
-     {!gameover? <p className='score'>Score:{score}</p>: null}
-    { loading && <p className='loading'>Loading questions...</p>}
-      {!loading && !gameover &&( <QuestionCard 
-      questionNr={qnumber +1}
-      totalQuestions={TOTAL_QUESTIONS}
-      question={questions[qnumber].question}
-      answers={questions[qnumber].answers}
-     userAnswer={userAnswer?userAnswer[qnumber]:undefined}
-      callback ={CheckAnswer}
-      />)}
-      {!gameover && !loading && userAnswer.length === qnumber + 1 && qnumber !== TOTAL_QUESTIONS -1 ?
-      ( <button className='next' onClick={NextQuestion}>Next Question</button>):null}
+    <div className="container">
+      <h1>General Quiz</h1>
+      {gameover || userAnswer.length === TOTAL_QUESTIONS ? (
+        <button className="start" onClick={startTrivia}>
+          Start
+        </button>
+      ) : null}
+
+      {!gameover ? <p className="score">Score:{score}</p> : null}
+      {loading && <p className="loader">Loading questions...</p>}
+      {!loading && !gameover && (
+        <QuestionCard
+          questionNr={qnumber + 1}
+          totalQuestions={TOTAL_QUESTIONS}
+          question={questions[qnumber].question}
+          answers={questions[qnumber].answers}
+          userAnswer={userAnswer ? userAnswer[qnumber] : undefined}
+          callback={CheckAnswer}
+        />
+      )} 
+      {!gameover &&
+      !loading &&
+      userAnswer.length === qnumber + 1 &&
+      qnumber !== TOTAL_QUESTIONS - 1 ? (
+        <button className="next start" onClick={NextQuestion}>
+          Next Question
+        </button>
+      ) : null}
+    
     </div>
   );
 }
